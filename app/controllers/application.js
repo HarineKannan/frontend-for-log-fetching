@@ -1,12 +1,23 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import queryparserLexer from './antlr/queryparserLexer.js.js';
-import queryparserParser from './antlr/queryparserParser.js.js';
-import * as antlr4 from 'antlr4';
+import queryparserLexer from './antlr/queryparserLexer.js';
+import queryparserParser from './antlr/queryparserParser.js';
+import  antlr4 from 'antlr4';
 import { ErrorListener } from 'antlr4';
 
+// import FetchingLogsController from './fetching-logs-controller';
+
+
 export default class ApplicationController extends Controller {
+  // @tracked fetchingLogsControllerInstance = new FetchingLogsController();
+
+  // @action
+  // async fetchLogs() {
+  //   this.fetchingLogsControllerInstance.setLogType(this.logtype);
+  //   await this.fetchingLogsControllerInstance.fetchLogs();
+  // }
+
   @tracked isTableView = true;
   @tracked isListView = false;
   @tracked searchQuery = "task = '2'";
@@ -33,8 +44,14 @@ export default class ApplicationController extends Controller {
   @tracked systemLastTime = this.getTime;
   @tracked ProviderNameMenuClicked = false;
 
+
+
+
+ 
+
   @action
   handleInput(event) {
+
     this.searchQuery = event.target.value;
     this.selectedSuggestion = null;
     const inputQuery = this.searchQuery;
@@ -97,6 +114,7 @@ export default class ApplicationController extends Controller {
     this.isListView = true;
     console.log('Switching to list view');
   }
+
 
   @action
   handleKeyDown(event) {
@@ -308,6 +326,7 @@ export default class ApplicationController extends Controller {
       payload,
     );
   }
+
 
   @action
   async SyncTime(url, payload) {

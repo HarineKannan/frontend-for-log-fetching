@@ -1,6 +1,5 @@
 {{!-- {{my-component sendDataToParent=(action "receiveDataFromComponent")}} --}}
 
-
 <div class="parent-container">
 
 <div class="container">
@@ -21,10 +20,14 @@
     </div>
  <div class="form-group buttons-container">
         <button class="btn" type="button" {{on "click" this.fetchLogs}}>Sync </button>
+        {{!-- <button class="btn" type="button" {{on "click" (fn hi.fetchLogs)}}>Sync</button> --}}
+
    </div>
-  
-   <div class="search-bar">
-      <div class="form-group">
+    
+
+    <div class="search-bar">
+
+     <div class="form-group">
          <p>Search with a Query: </p>
         <input type="text"  id="searchQuery"  value={{this.searchQuery}} placeholder="Search like eventcode = '16384' or eventidentifier = '1073758208'" 
              {{on "change" (action (mut this.searchQuery) value="target.value")}} {{on "input" this.handleInput}} 
@@ -41,6 +44,7 @@
                 </div>
              {{/if}}
        </div>
+
     <div class="form-group buttons-container">
         <button class="btn" disabled={{if this.searchPerformed "disabled"}} oninput={{action (mut this.searchQuery) value="target.value"id="searchQuery" }} type="button" {{on "click" this.searchLogs}} >Search</button>
        
@@ -50,13 +54,11 @@
     <div class="results-neededed">
       <p>No of results needed per page : </p>
          <input type="number" id="resultsPerPage" value={{this.resultsPerPage}} onchange={{action (mut this.resultsPerPage) value="target.value"}}>
-
     </div>  
   </div>
   <div>
 </div>
 </div> 
-
 
 
   <div class="results-Container">
@@ -79,15 +81,11 @@
 
     {{#if this.isTableView}}
        {{table-view}}
-
     {{/if}}
-   
 
 {{#if this.isListView}}
    {{list-view}}
 {{/if}}
-
-
     <div class="right-button" {{on "click" this.next}}>
       <img src="assets/images/right.png" alt="right arrow">
     </div>
@@ -98,24 +96,8 @@
   {{#if this.NoResults}}
       <h3 class = "no-results"><center>No Results Available as per your Queries</center></h3>
       {{else}}
-        <div class="query-format-container">
-          <h2><center>Query Formats</center></h2>
-          <ul>
-            <li>task = '2'</li>
-            <li>level = '4' and versiom = '0'</li>
-            <li>eventrecordid = '19606' or opcode != '0'</li>
-            <li>Process_ID = '0' or Thread_ID != '0'</li>
-          </ul>
-        </div>
-        <div class="time-container">
-          <h2><center>Last Sync Time</center></h2>
-          <ul>
-            <li>Application Logs : {{this.applicationLastTime}}</li>
-            <li>System Logs : {{this.systemLastTime}}</li>
-          </ul>
-        </div>
-{{/if}}
-
+        {{query-format-container applicationtime=this.applicationLastTime systemtime=this.systemLastTime}}
+  {{/if}}
   {{/if}}
 </div>
 </div> 
