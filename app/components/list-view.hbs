@@ -1,0 +1,13 @@
+ <div class="list-view-content">
+    {{#each this.paginatedResults as |result|}}
+      <div class="list-item-box">
+        <div class="list-item">
+          {{#each-in result as |key value|}}
+            {{#if value}}
+              <div class="list-item-property">• {{key}}: {{value}}</div> 
+            {{/if}}
+          {{/each-in}}
+        </div>
+      </div>
+    {{/each}}
+  </div>

@@ -1,0 +1,25 @@
+  <table>
+      <thead>
+        <tr>
+          <th>Record Number</th>
+          <th>Time Created</th>
+          <th>Provider Name <img {{on "click" this.ProviderNameMenu}} class="menu-icon" src="assets/images/threedots.png" alt="three dots icon"></th>
+          {{#if this.ProviderNameMenuClicked}}
+              {{dropdown}}        
+            {{/if}}
+          <th>Level    <img src="assets/images/threedots.png" alt="three dots icon" class="menu-icon"></th>
+          <th>Task<img src="assets/images/threedots.png" alt="three dots icon" class="menu-icon"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.paginatedResults as |result|}} 
+          <tr>
+            <td>{{result.eventrecordid}}</td>
+            <td>{{result.system_time}}</td>
+            <td>{{result.provider_name}}</td>
+            <td>{{result.level}}</td>
+            <td>{{result.task}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
